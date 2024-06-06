@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AstaChamma Game</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="service.js" defer></script>
+</head>
+<body> 
+    <div id="gameOverMessage"></div>
+    <div class="main-bar">
+        <h1><span style="color: rgb(3, 224, 88);">Asta</span><span style="color: red;">Chamma</span> <span style="color: rgb(3, 224, 88);">Online </span><span style="color: red;">Game</span></h1>
+        <button id="randomButton">DICE</button>
+        <p id="randomNumber"></p>
+        
+        <!-- First Table for Player 1 -->
+        <!-- <div class="tablecontain">
+            <table id="player1Table">
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table> -->
+
+        <!-- Game Board Table -->
+            <table>
+                <tbody id="gameBoard">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="x-mark"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="x-mark"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="x-mark"></td>
+                        <td class="x-mark"></td>
+                        <td></td>
+                        <td class="x-mark"></td>
+                        <td class="x-mark"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="x-mark"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="x-mark"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        <!-- Second Table for Player 2 -->
+            <!-- <table id="player2Table">
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table> -->
+        </div>
+    </div>
+
+    <!-- Add the audio element -->
+    <audio id="diceSound" src="dice-95077.mp3"></audio>
+    <audio id="jumpSound" src="player-jumping.wav"></audio>
+
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <p id="modalMessage"></p>
+            <button id="restartButton">Restart Game</button>
+        </div>
+    </div>
+</body>
+</html>
