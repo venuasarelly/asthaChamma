@@ -11,7 +11,53 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPlayer = 1;
     let currentDiceValue = 0;
     let hasRolledDice = false;
+   // var playerForm = document.getElementById('playerForm');
 
+    const playerForm = document.getElementById('playerForm');
+    if (playerForm) {
+        // Handle form submission
+        playerForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            let playerOneName = document.getElementById('venu1432').value.trim().toUpperCase();
+            let playerTwoName = document.getElementById('venu1234').value.trim().toUpperCase();
+
+            if (!playerOneName || !playerTwoName) {
+                alert('Both player names are required.');
+                return;
+            }
+
+            // Print names in console
+            console.log('Player One Name:', playerOneName);
+            console.log('Player Two Name:', playerTwoName);
+
+            // Store player names in localStorage
+            localStorage.setItem('playerOneName', playerOneName);
+            localStorage.setItem('playerTwoName', playerTwoName);
+
+            // Redirect to game page
+            window.location.href = 'game.html';
+        });
+    }
+    
+    const playerOneDisplay = document.getElementById('playerOne');
+    const playerTwoDisplay = document.getElementById('playerTwo');
+    
+    if (playerOneDisplay && playerTwoDisplay) {
+        // Retrieve player names from localStorage
+        const playerOneName = localStorage.getItem('playerOneName');
+        const playerTwoName = localStorage.getItem('playerTwoName');
+
+        // Update the display with the player names
+        if (playerOneName) {
+            playerOneDisplay.textContent = playerOneName;
+        }
+        if (playerTwoName) {
+            playerTwoDisplay.textContent = playerTwoName;
+        }
+    }
+
+    
     const safePositions = [
         { row: 2, col: 0 }, { row: 4, col: 2 }, { row: 2, col: 4 }, { row: 0, col: 2 },
         { row: 2, col: 1 }, { row: 2, col: 3 }, { row: 1, col: 2 }, { row: 3, col: 2 }
@@ -91,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasRolledDice = true;
         }
     });
-
+   
     gameBoard.addEventListener('click', (event) => {
         if (hasRolledDice && event.target.tagName === 'IMG') {
             const pieceClass = Array.from(event.target.classList).find(cls => cls.startsWith(`player${currentPlayer}-piece-`));
