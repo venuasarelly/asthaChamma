@@ -1,28 +1,4 @@
-@media screen and (max-width: 968px) {
-    .main-bar {
-        width: 90%; /* Adjust width for smaller screens */
-        margin-top: 50px; /* Adjust margin-top for smaller screens */
-        padding-bottom: 20px; /* Adjust padding for smaller screens */
-    }
-
-    table {
-        width: 100%; /* Make table width full width on smaller screens */
-    }
-
-    td {
-        width: 20%; /* Adjust cell width for smaller screens */
-        height: auto; /* Allow cell height to adjust based on content */
-        font-size: 12px; /* Adjust font size for smaller screens */
-    }
-
-    .players-position {
-        flex-direction: column; /* Adjust flex direction for smaller screens */
-        align-items: center;  /* Center align items on smaller screens */
-    }
-}
-
-
-
+/* Base styles */
 body {
     display: flex;
     justify-content: center;
@@ -34,40 +10,41 @@ body {
                 linear-gradient(to left, blue 2%, white 30%, transparent 2%);
     background-blend-mode: normal;
 }
+
 .main-bar {
     text-align: center;
     margin-top: 100px;
-    padding-bottom: 50px;
-    box-shadow: 10px 20px 18px 10px rgba(0,0,0,0.5);
-    transition: 0.3s;
+    /* padding-bottom: 50px; */
+    /* box-shadow: 10px 20px 18px 10px rgba(0,0,0,0.5); */
+    /* transition: 0.3s; */
     width: 40%;
-    border: 2px solid black;
-    
-    
-    
-  }
-  
-  .main-bar:hover {
+    /* border: 2px solid black; */
+}
+
+/* .main-bar:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
+} */
 
 table {
     border-collapse: collapse;
     margin: 0 auto;
 }
-.players-position{
+
+.players-position {
     display: flex;
-    justify-content: space-around;    
+    justify-content: space-around;
 }
+
 td {
-    width: 60px; /* Adjust the width as needed */
-    height: 60px; /* Adjust the height as needed */
+    width: 60px; 
+    height: 60px; 
     border: 3px solid black;
     text-align: center;
     vertical-align: middle;
     position: relative;
-    overflow: hidden; /* Ensure content does not overflow the cell */
+    overflow: hidden; 
 }
+
 .modal {
     display: none;
     position: fixed;
@@ -103,14 +80,15 @@ td {
     text-decoration: none;
     cursor: pointer;
 }
+
 .x-mark {
     background-color: rgb(149, 230, 149);
 }
 
 .cell-image {
-    width: 30px; 
-    height: 30px; 
-    position: absolute; 
+    width: 30px;
+    height: 30px;
+    position: absolute;
     transition: left 0.5s, top 0.5s;
 }
 
@@ -133,39 +111,58 @@ td {
 }
 
 .box {
-    width: 30px; 
-    height: 30px; 
+    width: 30px;
+    height: 30px;
     background-color: red; /* Adjust the color as needed */
     border: 1px solid black;
 }
 
 #randomNumber {
-    font-size: 20px; 
-    font-weight: bold; 
+    font-size: 20px;
+    font-weight: bold;
     margin-top: 10px;
-    color: navy; 
-    text-align: center; 
+    color: navy;
+    text-align: center;
 }
-#randomButton{
+
+#randomButton {
     border-radius: 15px;
     color: white;
-    background-color: blue ;
+    background-color: blue;
     padding-left: 30px;
     padding-right: 30px;
     font-size: 35px;
     border: none;
     background: url('ludo.png') no-repeat center center;
     background-size: contain;
-            width: 100px;  
-            height: 80px; 
-            border: none;
-            cursor: pointer;
-            text-indent: -9999px;
+    width: 100px;
+    height: 80px;
+    border: none;
+    cursor: pointer;
+    text-indent: -9999px;
 }
 
-.tablecontain{
+.tablecontain {
     display: flex;
-    justify-content: space-around; 
+    justify-content: space-around;
     align-items: center;
-    margin-top: 20px; 
+    margin-top: 20px;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 968px) {
+    .main-bar {
+        text-align: center;
+        margin-top: 20px;
+        /* padding-bottom: 50px; */
+        /* box-shadow: 10px 20px 18px 10px rgba(0,0,0,0.5); */
+        /* transition: 0.3s; */
+        width: 70%;
+        /* border: 2px solid black; */
+        
+    }
+    .players-position {
+        flex-direction: column; 
+        
+    }   
 }
