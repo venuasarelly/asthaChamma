@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AstaChamma Game</title>
     <link rel="stylesheet" href="style.css">
-    <script src="service.js" defer></script>
+    <script src="service.js" ></script>
 </head>
 <body> 
     <div id="gameOverMessage"></div>
     <div class="main-bar">
-        <h1 class="color : #011F5B">ASTA CHAMMA ONLINE GAME</h1>
+        <!-- <h1 class="color : #011F5B">ASTA CHAMMA ONLINE GAME</h1> -->
         <button id="randomButton">DICE</button>
         <p id="randomNumber"></p>
           <div class="players-position">
-            <h1 style="color : blue">PLAYER ONE</h1>
+            <h1 id="playerOne"style="color : blue"></h1>
         <!-- Game Board Table -->
             <table>
                 <tbody id="gameBoard">
@@ -53,7 +54,7 @@
                     </tr>
                 </tbody>
             </table>
-            <h1 style="color : red">PLAYER TWO</h1>
+            <h1 id="playerTwo"style="color : red"></h1>
         </div>
 
         </div>
@@ -71,5 +72,7 @@
             <button id="restartButton">Restart Game</button>
         </div>
     </div>
+
+    
 </body>
 </html>
