@@ -1,3 +1,28 @@
+@media screen and (max-width: 968px) {
+    .main-bar {
+        width: 90%; /* Adjust width for smaller screens */
+        margin-top: 50px; /* Adjust margin-top for smaller screens */
+        padding-bottom: 20px; /* Adjust padding for smaller screens */
+    }
+
+    table {
+        width: 100%; /* Make table width full width on smaller screens */
+    }
+
+    td {
+        width: 20%; /* Adjust cell width for smaller screens */
+        height: auto; /* Allow cell height to adjust based on content */
+        font-size: 12px; /* Adjust font size for smaller screens */
+    }
+
+    .players-position {
+        flex-direction: column; /* Adjust flex direction for smaller screens */
+        align-items: center;  /* Center align items on smaller screens */
+    }
+}
+
+
+
 body {
     display: flex;
     justify-content: center;
@@ -9,15 +34,6 @@ body {
                 linear-gradient(to left, blue 2%, white 30%, transparent 2%);
     background-blend-mode: normal;
 }
-
-.player1 {
-    width: 200px;
-    text-align: center;
-    position: absolute;
-    top: 20px; 
-    left: 20px; 
-}
-
 .main-bar {
     text-align: center;
     margin-top: 100px;
@@ -26,6 +42,8 @@ body {
     transition: 0.3s;
     width: 40%;
     border: 2px solid black;
+    
+    
     
   }
   
