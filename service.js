@@ -7,11 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalMessage = document.getElementById('modalMessage');
     const closeModal = document.getElementById('closeModal');
     const restartButton = document.getElementById('restartButton');
-
     let currentPlayer = 1;
     let currentDiceValue = 0;
     let hasRolledDice = false;
-   // var playerForm = document.getElementById('playerForm');
+    // var playerForm = document.getElementById('playerForm');
 
     const playerForm = document.getElementById('playerForm');
     if (playerForm) {
@@ -26,6 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Both player names are required.');
                 return;
             }
+            if (playerOneName.length > 6 || playerTwoName.length > 6) {
+                alert('Both player names must be at least 6 characters long.');
+                return;
+            }
+
 
             // Print names in console
             console.log('Player One Name:', playerOneName);
@@ -39,10 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'game.html';
         });
     }
-    
+
     const playerOneDisplay = document.getElementById('playerOne');
     const playerTwoDisplay = document.getElementById('playerTwo');
-    
+
     if (playerOneDisplay && playerTwoDisplay) {
         // Retrieve player names from localStorage
         const playerOneName = localStorage.getItem('playerOneName');
@@ -57,21 +61,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    
+
     const safePositions = [
         { row: 2, col: 0 }, { row: 4, col: 2 }, { row: 2, col: 4 }, { row: 0, col: 2 },
         { row: 2, col: 1 }, { row: 2, col: 3 }, { row: 1, col: 2 }, { row: 3, col: 2 }
     ];
 
     const playerPositions = {
-        1: [ { row: 2, col: 0 }, { row: 2, col: 0 }, { row: 2, col: 0 }, { row: 2, col: 0 } ],
-        2: [ { row: 2, col: 4 }, { row: 2, col: 4 }, { row: 2, col: 4 }, { row: 2, col: 4 } ]
+        1: [{ row: 2, col: 0 }, { row: 2, col: 0 }, { row: 2, col: 0 }, { row: 2, col: 0 }],
+        2: [{ row: 2, col: 4 }, { row: 2, col: 4 }, { row: 2, col: 4 }, { row: 2, col: 4 }]
     };
 
     const startingPositions = {
         1: { row: 2, col: 0 },
         2: { row: 2, col: 4 }
     };
+    
 
     const path1 = [
         { row: 2, col: 0 }, { row: 3, col: 0 }, { row: 4, col: 0 }, { row: 4, col: 1 }, { row: 4, col: 2 },
@@ -96,8 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.cell-image').forEach(piece => piece.remove());
 
         // Initialize player positions
-        playerPositions[1] = [ { row: 2, col: 0 }, { row: 2, col: 0 }, { row: 2, col: 0 }, { row: 2, col: 0 } ];
-        playerPositions[2] = [ { row: 2, col: 4 }, { row: 2, col: 4 }, { row: 2, col: 4 }, { row: 2, col: 4 } ];
+        playerPositions[1] = [{ row: 2, col: 0 }, { row: 2, col: 0 }, { row: 2, col: 0 }, { row: 2, col: 0 }];
+        playerPositions[2] = [{ row: 2, col: 4 }, { row: 2, col: 4 }, { row: 2, col: 4 }, { row: 2, col: 4 }];
 
         // Add the initial player images to their starting positions
         playerPositions[1].forEach((pos, index) => {
@@ -132,12 +137,37 @@ document.addEventListener('DOMContentLoaded', () => {
     diceButton.addEventListener('click', () => {
         if (!hasRolledDice) {
             diceSound.play(); // Play the dice sound
-            currentDiceValue = Math.floor(Math.random() * 4) + 1;
-            diceResult.textContent = `Player ${currentPlayer}'s Dice Roll Result: ${currentDiceValue}`;
+            const possibleValues = [1, 2, 3, 4, 8];
+            currentDiceValue = possibleValues[Math.floor(Math.random() * possibleValues.length)];
+
+            // Define an array of image paths corresponding to each dice value
+            const imagePaths = [
+                "1image.png",
+                "2image.png",
+                "3image.png",
+                "4image.png",
+                "8image.png"
+            ];
+
+            const playerOneName = document.getElementById('playerOne').textContent.trim().toUpperCase();
+            const playerTwoName = document.getElementById('playerTwo').textContent.trim().toUpperCase();
+            let imagePath = imagePaths[currentDiceValue - 1];
+            if (currentDiceValue === 8) {
+                imagePath = "8image.png"; // Special image for dice value 8
+            }
+            let playerDice
+            if (currentPlayer === 1) {
+                playerDice = playerOneName;
+            } else {
+                playerDice = playerTwoName;
+            }
+            diceResult.innerHTML = `player <span style="font-weight: bold; color: black;">${playerDice}</span>'s dice value <img src="${imagePath}" alt="Dice showing ${currentDiceValue}" width="100" height="100" />`;
+
             hasRolledDice = true;
         }
     });
-   
+
+
     gameBoard.addEventListener('click', (event) => {
         if (hasRolledDice && event.target.tagName === 'IMG') {
             const pieceClass = Array.from(event.target.classList).find(cls => cls.startsWith(`player${currentPlayer}-piece-`));
@@ -157,11 +187,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (checkForWin(currentPlayer)) {
-                showGameOverMessage(`Player ${currentPlayer} wins!`);
+                const currentPlayerName = localStorage.getItem(`player${currentPlayer}Name`);
+                showGameOverMessage(`Player ${currentPlayerName} wins!`);
                 diceButton.disabled = true; // Disable the dice button
             } else {
-                currentPlayer = currentPlayer === 1 ? 2 : 1;
-                hasRolledDice = false;
+                if (currentDiceValue === 4 || currentDiceValue === 8) {
+                    currentPlayer = currentPlayer === 1 ? 1 : 2;
+                    hasRolledDice = false;
+                } else {
+                    currentPlayer = currentPlayer === 1 ? 2 : 1;
+                    hasRolledDice = false;
+                }
             }
         }
     });
@@ -207,8 +243,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function showGameOverMessage(message) {
         modalMessage.textContent = message;
         gameOverModal.style.display = "block";
+        if (message.includes('wins')) {
+            playFireworks(); // Play fireworks if the message indicates a win
+        }
     }
+    function playFireworks() {
+        const fireworks = document.querySelectorAll('.firework');
+        fireworks.forEach(firework => {
+            firework.classList.add('active');
+        });
 
+        setTimeout(() => {
+            fireworks.forEach(firework => {
+                firework.classList.remove('active');
+            });
+        }, 5000); // Hide fireworks after 5 seconds
+    }
     closeModal.addEventListener('click', () => {
         gameOverModal.style.display = "none";
     });
