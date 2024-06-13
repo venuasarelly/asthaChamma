@@ -14,9 +14,9 @@ body {
 .main-bar {
     text-align: center;
     margin-top: 100px;
-    /* padding-bottom: 50px; */
+    padding-bottom: 50px;
     /* box-shadow: 10px 20px 18px 10px rgba(0,0,0,0.5); */
-    /* transition: 0.3s; */
+    transition: 0.3s;
     width: 40%;
     /* border: 2px solid black; */
 }
@@ -141,6 +141,127 @@ td {
     cursor: pointer;
     text-indent: -9999px;
 }
+.fireworks {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .fireworks .firework {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    margin: 0px 50px;
+  }
+  .fireworks .firework:before {
+    content: "";
+    display: block;
+    border-radius: 5px;
+    background-color: #daa520;
+    width: 5px;
+    height: 0px;
+    will-change: transform;
+    transform: translateY(1000px);
+    animation: fireworkstart 3s ease-out infinite;
+  }
+  .fireworks .firework .explosion {
+    position: absolute;
+    top: 0;
+    width: 5px;
+    height: 20px;
+    opacity: 0;
+    transform-origin: top center;
+    will-change: transform;
+    animation: explosion 0.7s linear 3s infinite;
+  }
+  .fireworks .firework .explosion:nth-child(1) {
+    transform: rotate(0deg);
+  }
+  .fireworks .firework .explosion:nth-child(2) {
+    transform: rotate(90deg);
+  }
+  .fireworks .firework .explosion:nth-child(3) {
+    transform: rotate(180deg);
+  }
+  .fireworks .firework .explosion:nth-child(4) {
+    transform: rotate(-90deg);
+  }
+  .fireworks .firework .explosion:nth-child(5) {
+    transform: rotate(45deg);
+  }
+  .fireworks .firework .explosion:nth-child(6) {
+    transform: rotate(-45deg);
+  }
+  .fireworks .firework .explosion:nth-child(7) {
+    transform: rotate(135deg);
+  }
+  .fireworks .firework .explosion:nth-child(8) {
+    transform: rotate(225deg);
+  }
+  
+  .fireworks .firework .explosion .spark {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    will-change: transform;
+    animation: explosion2 0.7s ease-in-out 3s infinite;
+  }
+  
+  .fireworks .firework .explosion .spark.silver {
+    background-color: #c0c0c0;
+  }
+  .fireworks .firework .explosion .spark.gold {
+    background-color: #daa520;
+  }
+  @keyframes fireworkstart {
+    0% {
+      height: 0px;
+      transform: translateY(1000px);
+    }
+    50% {
+      height: 50px;
+    }
+    75% {
+      height: 30px;
+    }
+    100% {
+      height: 0;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes explosion {
+    0% {
+      height: 0px;
+      opacity: 0;
+    }
+    50% {
+      height: 25px;
+      opacity: 1;
+    }
+    100% {
+      height: 0px;
+      opacity: 0;
+    }
+  }
+  @keyframes explosion2 {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(5px);
+    }
+    75% {
+      transform: translateY(50px);
+    }
+    100% {
+      transform: translateY(70px);
+    }
+  }
+  
 
 .tablecontain {
     display: flex;
@@ -149,6 +270,18 @@ td {
     margin-top: 20px;
 }
 
+#playerOne{
+  writing-mode: vertical-rl;
+  white-space: nowrap; 
+  text-align: center;
+  margin: 0 auto;
+  
+}
+#playerTwo{
+  writing-mode: vertical-rl;
+  text-align: center;
+  margin: 0 auto;
+}
 /* Media query for smaller screens */
 @media screen and (max-width: 968px) {
     .main-bar {
@@ -157,12 +290,34 @@ td {
         /* padding-bottom: 50px; */
         /* box-shadow: 10px 20px 18px 10px rgba(0,0,0,0.5); */
         /* transition: 0.3s; */
-        width: 70%;
+        width: 100%;
+        
         /* border: 2px solid black; */
         
     }
-    .players-position {
+    /* .players-position {
         flex-direction: column; 
         
-    }   
+    } */
+    body {
+       
+        background: linear-gradient(to right, red 2%, white 20%, transparent 20%), 
+                    linear-gradient(to left, blue 1%, white 20%, transparent 2%);
+       
+    }
+    #playerOne{
+      writing-mode: vertical-rl;
+      white-space: nowrap; 
+      text-align: center;
+      margin: 0 auto;
+      
+    }
+    #playerTwo{
+      writing-mode: vertical-rl;
+      text-align: center;
+      margin: 0 auto;
+    }
+  
+
+    
 }
