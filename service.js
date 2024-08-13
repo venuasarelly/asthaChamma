@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (checkForWin(currentPlayer)) {
                 const currentPlayerName = localStorage.getItem(`player${currentPlayer}Name`);
-                showGameOverMessage(`Player ${currentPlayerName} wins!`);
+                showGameOverMessage(`Player ${currentPlayer} wins!`);
                 diceButton.disabled = true; // Disable the dice button
             } else {
                 if (currentDiceValue === 4 || currentDiceValue === 8) {
